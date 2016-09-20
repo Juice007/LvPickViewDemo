@@ -110,6 +110,7 @@
 				TargetAttributes = {
 					215674A61D80278E006F7FBD = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 3658CCJ7KQ;
 					};
 				};
 			};
@@ -265,6 +266,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 3658CCJ7KQ;
 				INFOPLIST_FILE = LvPickViewDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = wcl.LvPickViewDemo;
@@ -276,6 +278,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 3658CCJ7KQ;
 				INFOPLIST_FILE = LvPickViewDemo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = wcl.LvPickViewDemo;

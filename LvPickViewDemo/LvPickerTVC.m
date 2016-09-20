@@ -14,7 +14,7 @@
 @interface LvPickerTVC () <UIPickerViewDelegate, UIPickerViewDataSource> {
     UIDatePicker *datePicker;
     
-    UIPickerView *fruitPicker;
+    UIPickerView *pickerView;
 }
 
 @property (weak, nonatomic) IBOutlet UITextField *timeTextField;
@@ -30,9 +30,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self setupTimePickerView];
+    [self initDatePicker];
     
-    [self setupFruitPickerView];
+    [self initPickerView];
     
 }
 
@@ -44,7 +44,7 @@
     return _fruitArray;
 }
 
-- (void)setupTimePickerView {
+- (void)initDatePicker {
     
     //设置UIToolBar
     UIToolbar *timePickerToolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 33)];
@@ -83,26 +83,27 @@
     [_fruitTextField resignFirstResponder];
 }
 
-- (void)setupFruitPickerView {
+- (void)initPickerView {
     //设置UIToolBar
-    UIToolbar *fruitPickerToolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 33)];
-    [fruitPickerToolBar setBackgroundColor:[UIColor whiteColor]];
+    UIToolbar *pickerToolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 33)];
+    [pickerToolBar setBackgroundColor:[UIColor whiteColor]];
     UIBarButtonItem *cancelTollBarItem = [[UIBarButtonItem alloc] initWithTitle:@"取消" style:UIBarButtonItemStylePlain target:self action:@selector(clickCancel)];
     UIBarButtonItem *spaceToolBarItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:self action:nil];
-    UIBarButtonItem *doneToolBarItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(didSelectFruit)];
-    [fruitPickerToolBar setItems:[NSArray arrayWithObjects:cancelTollBarItem, spaceToolBarItem, doneToolBarItem, nil]];
+    UIBarButtonItem *doneToolBarItem = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(didSelectItem)];
+    [pickerToolBar setItems:[NSArray arrayWithObjects:cancelTollBarItem, spaceToolBarItem, doneToolBarItem, nil]];
     
-    //设置UIPickerView
-    fruitPicker = [[UIPickerView alloc] initWithFrame:CGRectMake(0, (2 / 3) * SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT / 3)];
-    fruitPicker.delegate = self;
-    fruitPicker.dataSource = self;
-    fruitPicker.backgroundColor = [UIColor whiteColor];
-    _fruitTextField.inputView = fruitPicker;
+    //设置UIPickerView`
+//    pickerView = [[UIPickerView alloc] initWithFrame:CGRectMake(0, (2 / 3) * SCREEN_HEIGHT, SCREEN_WIDTH, SCREEN_HEIGHT / 3)];
+    pickerView = [[UIPickerView alloc] init];
+    pickerView.delegate = self;
+    pickerView.dataSource = self;
+    pickerView.backgroundColor = [UIColor whiteColor];
+    _fruitTextField.inputView = pickerView;
     _fruitTextField.tintColor = [UIColor clearColor]; //隐藏光标
-    [_fruitTextField setInputAccessoryView:fruitPickerToolBar]; //加入toolBar
+    [_fruitTextField setInputAccessoryView:pickerToolBar]; //加入toolBar
 }
 
-- (void)didSelectFruit {
+- (void)didSelectItem {
     [_fruitTextField resignFirstResponder];
 }
 
@@ -122,8 +123,9 @@
 
 //滑动的时候显示在textField上
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    NSString *fruitStr = [self pickerView:pickerView titleForRow:row forComponent:component];
-    _fruitTextField.text = fruitStr;
+//    NSString *fruitStr = [self pickerView:pickerView titleForRow:row forComponent:component];
+//    _fruitTextField.text = fruitStr;
+    _fruitTextField.text = _fruitArray[row];
 }
 
 #pragma mark - 开始拖拽(实现点击空白收起键盘)
